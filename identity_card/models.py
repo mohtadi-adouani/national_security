@@ -3,10 +3,11 @@ from django.db import models
 from datetime import datetime, timedelta
 
 class IdentityCard(models.Model):
-
+    M = 'M'
+    F = 'F'
     SEXE = {
-        'M': "Male",
-        'F': "Female"
+        M: "Male",
+        F: "Female"
     }
     VALIDITY_YEARS = 10
     
@@ -18,7 +19,8 @@ class IdentityCard(models.Model):
     number = models.CharField(max_length=12, default=get_random_string(length=12))
     sexe = models.CharField(
         max_length=1,
-        choices=SEXE
+        choices=SEXE,
+        default=F
     )
     
     date_of_birth = models.DateField()

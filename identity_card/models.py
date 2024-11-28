@@ -73,8 +73,7 @@ class Passport(models.Model):
     )
     date_of_birth = models.DateField()
     place_of_birth = models.CharField(max_length=50)
-    eyes_color = models.CharField(
-        max_length=1,
+    eyes_color = models.IntegerField(
         choices=EYES_COLOR,
         default=list(EYES_COLOR.keys())[0]
     )

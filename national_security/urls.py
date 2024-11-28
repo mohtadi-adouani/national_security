@@ -1,10 +1,11 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from identity_card.views import IdentityCardViewSet
+from identity_card.views import IdentityCardViewSet, PassportViewSet
 
 router = routers.DefaultRouter()
 router.register(r'idc', IdentityCardViewSet)
+router.register(r'passport', PassportViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

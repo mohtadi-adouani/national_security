@@ -55,7 +55,7 @@ class IdentityCard(models.Model):
     expiry_date = models.DateField(default=datetime.now() + timedelta(days=VALIDITY_YEARS * 365 -1))
 
     def __str__(self) -> str:
-        return f"{self.first_name} - {self.last_name}"
+        return f"Identity Card{self.first_name} - {self.last_name}"
     
 
 class Passport(models.Model):
@@ -91,4 +91,4 @@ class Passport(models.Model):
     expiry_date = models.DateField()
 
     def __str__(self) -> str:
-        return f"{self.first_name} - {self.last_name}"
+        return f"Passport {self.first_name} - {self.last_name}"

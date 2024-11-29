@@ -1,6 +1,7 @@
 from django.utils.crypto import get_random_string
 from django.db import models
 from datetime import datetime, timedelta
+from .managers import PassportManager, IdentityCardManager
 
 SEXE = {
     'F': "Female",
@@ -24,48 +25,33 @@ EYES_COLOR = {
 }
 
 class IdentityCard(models.Model):
-
     VALIDITY_YEARS = 10
-    
+    # identity
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-
-    adress = models.CharField(max_length=65)
-    # random number generated for each card
-    number = models.CharField(max_length=12, default=get_random_string(length=12))
     sexe = models.CharField(
         max_length=1,
         choices=SEXE,
         default=list(SEXE.keys())[0]
     )
-
     date_of_birth = models.DateField()
     place_of_birth = models.CharField(max_length=50)
-    
+    adress = models.CharField(max_length=65)
+    # idc info
     date_of_creation = models.DateField(auto_now_add=True)
-    # TODO: improve expiration date calculation
-    expiry_date = models.DateField(default=datetime.now() + timedelta(days=VALIDITY_YEARS * 365 -1))
+    expiry_date = models.DateField(blank=True, null=True)
+    number = models.CharField(max_length=12, blank=True)
 
-    
-    date_of_birth = models.DateField()
-    place_of_birth = models.CharField(max_length=50)
-    
-    date_of_creation = models.DateField(auto_now_add=True)
-    # TODO: improve expiration date calculation
-    expiry_date = models.DateField(default=datetime.now() + timedelta(days=VALIDITY_YEARS * 365 -1))
-
+    objects = IdentityCardManager()
     def __str__(self) -> str:
-        return f"Identity Card{self.first_name} - {self.last_name}"
+        return f"Identity Card {self.first_name} - {self.last_name}"
     
 
 class Passport(models.Model):
     VALIDITY_YEARS = 10
-
     # identity
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
-    # random number generated for each card
-    number = models.CharField(max_length=12, default=get_random_string(length=12))
     sexe = models.CharField(
         max_length=1,
         choices=SEXE,
@@ -78,7 +64,6 @@ class Passport(models.Model):
         default=list(EYES_COLOR.keys())[0]
     )
     height = models.PositiveIntegerField()
-    
     # passport
     type = models.CharField(
         max_length=1,
@@ -86,8 +71,9 @@ class Passport(models.Model):
         default=list(PASSPORT_TYPE.keys())[0]
     )
     date_of_creation = models.DateField(auto_now_add=True)
-    # TODO: improve expiration date calculation
-    expiry_date = models.DateField()
+    expiry_date = models.DateField(blank=True, null=True)
+    number = models.CharField(max_length=12, blank=True)
 
+    objects = PassportManager()
     def __str__(self) -> str:
         return f"Passport {self.first_name} - {self.last_name}"

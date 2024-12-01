@@ -1,6 +1,4 @@
-from django.utils.crypto import get_random_string
 from django.db import models
-from datetime import datetime, timedelta
 from .managers import PassportManager, IdentityCardManager
 
 SEXE = {

@@ -44,7 +44,7 @@ INSTALLED_APPS = [
     'identity_card',
     'factory',
     'celery',
-    'kombu.transport.django',
+    #'kombu.transport.django',
 ]
 
 MIDDLEWARE = [

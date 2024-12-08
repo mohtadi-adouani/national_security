@@ -51,6 +51,9 @@ class IdentityCard(models.Model):
     objects = IdentityCardManager()
     def __str__(self) -> str:
         return f"Identity Card {self.first_name} - {self.last_name}"
+
+    def activate(self):
+        self.status = self.IDC_STATUS[True]
     
 
 class Passport(models.Model):
@@ -90,3 +93,6 @@ class Passport(models.Model):
     objects = PassportManager()
     def __str__(self) -> str:
         return f"Passport {self.first_name} - {self.last_name}"
+
+    def activate(self):
+        self.status = self.PASSPORT_STATUS[True]

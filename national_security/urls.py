@@ -2,11 +2,12 @@ from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
 from identity_card.views import IdentityCardViewSet, PassportViewSet
-from factory.views import PreRequestIDCViewSet
+from factory.views import PreRequestIDCViewSet, PreRequestPassportViewSet
 from .views import UserViewSet
 
 router = routers.DefaultRouter()
-router.register(r'prerequestidc', PreRequestIDCViewSet)
+router.register(r'pre_request_idc', PreRequestIDCViewSet)
+router.register(r'pre_request_passport', PreRequestPassportViewSet)
 router.register(r'idc', IdentityCardViewSet)
 router.register(r'passport', PassportViewSet)
 router.register(r'users', UserViewSet)

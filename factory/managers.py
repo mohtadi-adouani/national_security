@@ -9,3 +9,9 @@ class PreRequestIDCManager(models.Manager):
         __idcpr.save()  # save object
         return __idcpr
 
+class PreRequestPassportManager(models.Manager):
+    def create(self, **kwargs: Any) -> Any:
+        __passport_pr =  self.model(**kwargs) # create passport pre request
+        __passport_pr.number = get_random_string(length=12) # generate number
+        __passport_pr.save()  # save object
+        return __passport_pr

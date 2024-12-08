@@ -50,6 +50,28 @@ class PassportManager(models.Manager):
                                                 __date_now.day)
         __passport.save()  # save object
         return __passport
+
+    def create_from_pre_request(self, pre_request):
+        __passport =  self.model(
+            first_name=pre_request.first_name,
+            last_name=pre_request.last_name,
+            sexe=pre_request.sexe,
+            eyes_color=pre_request.eyes_color,
+            height=pre_request.height,
+            date_of_birth=pre_request.date_of_birth,
+            place_of_birth=pre_request.place_of_birth,
+            date_of_creation=pre_request.date_of_creation,
+            type=pre_request.type,
+        )
+        __passport.number = get_random_string(length=12) # generate number
+        # generate expiry date
+        __date_now = datetime.date.today()
+        __passport.date_of_creation = __date_now
+        __passport.expiry_date = datetime.date(__date_now.year + self.model.VALIDITY_YEARS,
+                                            __date_now.month,
+                                            __date_now.day)
+        __passport.save()  # save object
+        return __passport
         
         
 

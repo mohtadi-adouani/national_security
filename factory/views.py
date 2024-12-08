@@ -11,6 +11,9 @@ class PreRequestIDCViewSet(mixins.CreateModelMixin,
     queryset = PreRequestIDC.objects.all()
     serializer_class = PreRequestIDCSerializer
 
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
+
     @action(detail=True, methods=['post'])
     def validate(self, request, pk=None):
         pre_req_idc = self.get_object()
@@ -25,6 +28,9 @@ class PreRequestPassportViewSet(mixins.CreateModelMixin,
                             viewsets.GenericViewSet):
     queryset = PreRequestPassport.objects.all()
     serializer_class = PreRequestPassportSerializer
+
+    def perform_create(self, serializer):
+        serializer.save(author=self.request.user)
 
     @action(detail=True, methods=['post'])
     def validate(self, request, pk=None):

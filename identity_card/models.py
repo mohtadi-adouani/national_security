@@ -24,6 +24,10 @@ EYES_COLOR = {
 
 class IdentityCard(models.Model):
     VALIDITY_YEARS = 10
+    IDC_STATUS = {
+        False: 'INACTIVE',
+        True: 'ACTIVE',
+    }
     # identity
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -39,6 +43,10 @@ class IdentityCard(models.Model):
     date_of_creation = models.DateField(auto_now_add=True)
     expiry_date = models.DateField(blank=True, null=True)
     number = models.CharField(max_length=12, blank=True)
+    status = models.BooleanField(
+        choices=IDC_STATUS,
+        default=list(IDC_STATUS.keys())[0]
+    )
 
     objects = IdentityCardManager()
     def __str__(self) -> str:
@@ -47,6 +55,10 @@ class IdentityCard(models.Model):
 
 class Passport(models.Model):
     VALIDITY_YEARS = 10
+    PASSPORT_STATUS = {
+        False: 'INACTIVE',
+        True: 'ACTIVE',
+    }
     # identity
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -71,7 +83,10 @@ class Passport(models.Model):
     date_of_creation = models.DateField(auto_now_add=True)
     expiry_date = models.DateField(blank=True, null=True)
     number = models.CharField(max_length=12, blank=True)
-
+    status = models.BooleanField(
+        choices=PASSPORT_STATUS,
+        default=list(PASSPORT_STATUS.keys())[0]
+    )
     objects = PassportManager()
     def __str__(self) -> str:
         return f"Passport {self.first_name} - {self.last_name}"

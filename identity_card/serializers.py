@@ -7,7 +7,7 @@ class IdentityCardSerializer(serializers.HyperlinkedModelSerializer):
         model = IdentityCard
         fields = ['url', 'first_name', 'last_name', 'date_of_birth', 'place_of_birth',
                   'adress','number',
-                  'date_of_creation', 'expiry_date']
+                  'date_of_creation', 'expiry_date', 'status']
         
 class PassportSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:

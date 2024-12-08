@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from identity_card.models import SEXE
+from identity_card.models import SEXE, IdentityCard
 from .managers import PreRequestIDCManager
 from datetime import datetime
 
@@ -24,6 +24,8 @@ class PreRequestIDC(models.Model):
     date_of_creation = models.DateTimeField(auto_now_add=True)
     number = models.CharField(max_length=12, blank=True)
     validation = models.DateTimeField(null=True, blank=True) # corrector validated idc
+    identity_card = models.ForeignKey(IdentityCard, on_delete=models.SET_NULL, default=None,
+                                      blank=True, null=True)
 
     objects = PreRequestIDCManager()
     def __str__(self) -> str:
